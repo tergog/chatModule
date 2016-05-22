@@ -1,1 +1,1 @@
-# improvedChadModule
+# improvedChatModule
