@@ -13,7 +13,6 @@
         var smilesForChat = document.getElementById('smiles_for_chat');
         var contactListSearch = document.getElementById('contact_list_search');
         chat.scrollTop = chat.scrollHeight;
-
         var myData = {
             "_id": "507f191e810c19729de859ea",
             "name": "Eugene Gogol",
@@ -171,15 +170,18 @@
 
                 event.preventDefault();
 
-                chatWindow.appendChild(
-                    createDOMElement('li', false, false, false,
-                        createDOMElement('div', 'img_wrap', false, false,
-                            createDOMElement('img', 'thumb', false, [['src', myData.thumb]])),
-                        createDOMElement('div', 'text_wrap', false, false,
-                            createDOMElement('p', 'chat_name', myData.name),
-                            createDOMElement('p', 'chat_message_data', timeNow),
-                            createDOMElement('div', 'chat_message_wrap', false, false,
-                                createDOMElement('p', false, event.target.value)))));
+                chatWindow.appendChild(createEl({el: 'li', children: [
+                                            createEl({el: 'div', elClass: 'img_wrap', children: [
+                                                createEl({el: 'img', elClass:'thumb', attrs: [['src', myData.thumb]]})
+                                            ]}),
+                                            createEl({el: 'div', elClass: 'text_wrap', children: [
+                                                createEl({el: 'p', elClass: 'chat_name', innerData: myData.name}),
+                                                createEl({el: 'p', elClass: 'chat_message_data', innerData: timeNow}),
+                                                createEl({el: 'div', elClass: 'chat_message_wrap', children: [
+                                                    createEl({el: 'p', innerData: event.target.value})
+                                                ]})
+                                            ]})
+                    ]}));
 
                 chat.scrollTop = chat.scrollHeight;
 
@@ -205,25 +207,26 @@
         });
     });
     
-    function createDOMElement (el, elClass, innerData, attrs, children) {
-        var node = document.createElement(el);
+    function createEl (elObj) {
+        var node = document.createElement(elObj.el);
         
-        if (elClass) {
-            node.className = elClass;
+        if (elObj.elClass) {
+            node.className = elObj.elClass;
         }
         
-        if (innerData) {
-            node.innerHTML = innerData
+        if (elObj.innerData) {
+            node.innerHTML = elObj.innerData
         }
         
-        if (attrs) {
-            for (var j = 0; j < attrs.length; j++) {
-                node.setAttribute(attrs[j][0], attrs[j][1]);
+        if (elObj.attrs) {
+            for (var j = 0; j < elObj.attrs.length; j++) {
+                node.setAttribute(elObj.attrs[j][0], elObj.attrs[j][1]);
             }
         }
-        
-        for (var i = 4; i < arguments.length; i++) {
-            node.appendChild(arguments[i]);
+        if (elObj.children) {
+            for (var i = 0; i < elObj.children.length; i++) {
+                node.appendChild(elObj.children[i]);
+            }
         }
         
         return node;
@@ -231,28 +234,13 @@
 
     function createContactList(list, parent) {
         return list.forEach(function (contact) {
-            var li = document.createElement('li');
-            var img = document.createElement('img');
-            var pName = document.createElement('p');
-            var pMessageCount = document.createElement('p');
-            var div = document.createElement('div');
-            li.className = 'contact_user';
-            div.className = 'contact_count';
-            img.setAttribute('src', contact.thumb);
-            pName.innerHTML = contact.name;
-            pName.className = 'contact_name';
-            pMessageCount.innerHTML = contact.count;
-            div.appendChild(pMessageCount);
-            li.appendChild(img);
-            li.appendChild(pName);
-            li.appendChild(div);
-            parent.appendChild(li);
-            if (!contact.count) {
-                div.className = 'hidden';
-            }
-            if (contact.count >= 99) {
-                pMessageCount.innerHTML = '99+';
-            }
-        })
+            parent.appendChild(createEl({el: 'li', elClass: 'contact_user', children: [
+                                    createEl({el: 'img', attrs: [['src', contact.thumb]]}),
+                                    createEl({el: 'p', elClass: 'contact_name', innerData: contact.name}),
+                                    createEl({el: 'div', elClass: 'contact_count', children: [
+                                        createEl({el: 'p', innerData: contact.count})
+                                    ]})
+                ]}));
+    })
     }
 })();
