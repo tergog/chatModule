@@ -1,5 +1,106 @@
 (function () {
 
+    var menu = document.getElementById("menu_bar");
+    var navMnu = document.getElementById('menu_navigation');
+    var navMnuChildren = navMnu.children;
+    var textarea = document.getElementById('textarea');
+    var chat = document.getElementsByClassName('chat_window')[0];
+    var chatWindow = document.getElementsByClassName('chat_list_style')[0];
+    var contactList = document.getElementsByClassName('contact_list')[0];
+    var contactListChildren = contactList.children;
+    var chatSmiles = document.getElementById('chatSmiles');
+    var timeNow = ('Today,' + new Date().getHours() + ':' + new Date().getMinutes());
+    var smilesForChat = document.getElementById('smiles_for_chat');
+    var contactListSearch = document.getElementById('contact_list_search');
+    var caret = document.getElementById('caret_bar');
+    var submitBtn = document.getElementById('submitBtn');
+    var myData = {
+        "_id": "507f191e810c19729de859ea",
+        "name": "Eugene Gogol",
+        "link": "#",
+        "thumb": "./img/eugene_thumb.png",
+        "friends": [
+            {
+                "_id": "507f191e810c19729de860ea",
+                "name": "MaximModus",
+                "link": "#",
+                "messages": [{
+                    "text": "Hi!",
+                    "date": "Yesterday, 16:28"
+                }],
+                "thumb": "./img/m_thumb.png",
+                "count": "150"
+            },
+            {
+                "_id": "507f191e810c19729de861ea",
+                "name": "Thomas Brown",
+                "link": "#",
+                "messages": [],
+                "thumb": "./img/thomas_thumb.png",
+                "count": "3"
+            },
+            {
+                "_id": "507f191e810c19729de862ea",
+                "name": "Edward LeCriston",
+                "link": "#",
+                "messages": [{
+                    "text": "I agree, like!",
+                    "date": "Yesterday, 18:53"
+                }],
+                "thumb": "./img/edward_thumb.png",
+                "count": "6"
+            },
+            {
+                "_id": "507f191e810c19729de863ea",
+                "name": "Cristian Smitt",
+                "link": "#",
+                "messages": [],
+                "thumb": "./img/cristian_thumb.png",
+                "count": "2"
+            },
+            {
+                "_id": "507f191e810c19729de864ea",
+                "name": "Sandy Miller",
+                "link": "#",
+                "messages": [{
+                    "text": "Who knows the recipe for stuffed cabbage ?",
+                    "date": "Yesterday, 20:12"
+                }],
+                "thumb": "./img/sandy_thumb.png"
+            },
+            {
+                "_id": "507f191e810c19729de865ea",
+                "name": "Princess Murphy",
+                "link": "#",
+                "messages": [{
+                    "text": "Hello, my friends! I love this pack of smiles",
+                    "date": "Yesterday, 16:48"
+                }],
+                "thumb": "./img/princess_thumb.png"
+            },
+            {
+                "_id": "507f191e810c19729de866ea",
+                "name": "Artour Bargeman",
+                "link": "#",
+                "messages": [{
+                    "text": "Hello, Bogdan! Yes, funny smiles",
+                    "date": "Yesterday, 17:00"
+                }],
+                "thumb": "./img/artour_thumb.png"
+            },
+            {
+                "_id": "507f191e810c19729de867ea",
+                "name": "Andrey Afonin",
+                "link": "#",
+                "messages": [{
+                    "text": "Privet bratishki",
+                    "date": "10 minutes ago"
+                }],
+                "thumb": "./img/andrey_thumb.png"
+            }
+        ]
+    };
+
     var customData = {
         caretImg: ['./img/caret_down.png', './img/caret_up.png'],
         classes: {
@@ -12,107 +113,6 @@
     };
 
     document.addEventListener("DOMContentLoaded", function () {
-
-        var menu = document.getElementById("menu_bar");
-        var navMnu = document.getElementById('menu_navigation');
-        var navMnuChildren = navMnu.children;
-        var textarea = document.getElementById('textarea');
-        var chat = document.getElementsByClassName('chat_window')[0];
-        var chatWindow = document.getElementsByClassName('chat_list_style')[0];
-        var contactList = document.getElementsByClassName('contact_list')[0];
-        var contactListChildren = contactList.children;
-        var chatSmiles = document.getElementById('chatSmiles');
-        var timeNow = ('Today,' + new Date().getHours() + ':' + new Date().getMinutes());
-        var smilesForChat = document.getElementById('smiles_for_chat');
-        var contactListSearch = document.getElementById('contact_list_search');
-        var caret = document.getElementById('caret_bar');
-        var submitBtn = document.getElementById('submitBtn');
-        var myData = {
-            "_id": "507f191e810c19729de859ea",
-            "name": "Eugene Gogol",
-            "link": "#",
-            "thumb": "./img/eugene_thumb.png",
-            "friends": [
-                {
-                    "_id": "507f191e810c19729de860ea",
-                    "name": "MaximModus",
-                    "link": "#",
-                    "messages": [{
-                        "text": "Hi!",
-                        "date": "Yesterday, 16:28"
-                    }],
-                    "thumb": "./img/m_thumb.png",
-                    "count": "150"
-                },
-                {
-                    "_id": "507f191e810c19729de861ea",
-                    "name": "Thomas Brown",
-                    "link": "#",
-                    "messages": [],
-                    "thumb": "./img/thomas_thumb.png",
-                    "count": "3"
-                },
-                {
-                    "_id": "507f191e810c19729de862ea",
-                    "name": "Edward LeCriston",
-                    "link": "#",
-                    "messages": [{
-                        "text": "I agree, like!",
-                        "date": "Yesterday, 18:53"
-                    }],
-                    "thumb": "./img/edward_thumb.png",
-                    "count": "6"
-                },
-                {
-                    "_id": "507f191e810c19729de863ea",
-                    "name": "Cristian Smitt",
-                    "link": "#",
-                    "messages": [],
-                    "thumb": "./img/cristian_thumb.png",
-                    "count": "2"
-                },
-                {
-                    "_id": "507f191e810c19729de864ea",
-                    "name": "Sandy Miller",
-                    "link": "#",
-                    "messages": [{
-                        "text": "Who knows the recipe for stuffed cabbage ?",
-                        "date": "Yesterday, 20:12"
-                    }],
-                    "thumb": "./img/sandy_thumb.png"
-                },
-                {
-                    "_id": "507f191e810c19729de865ea",
-                    "name": "Princess Murphy",
-                    "link": "#",
-                    "messages": [{
-                        "text": "Hello, my friends! I love this pack of smiles",
-                        "date": "Yesterday, 16:48"
-                    }],
-                    "thumb": "./img/princess_thumb.png"
-                },
-                {
-                    "_id": "507f191e810c19729de866ea",
-                    "name": "Artour Bargeman",
-                    "link": "#",
-                    "messages": [{
-                        "text": "Hello, Bogdan! Yes, funny smiles",
-                        "date": "Yesterday, 17:00"
-                    }],
-                    "thumb": "./img/artour_thumb.png"
-                },
-                {
-                    "_id": "507f191e810c19729de867ea",
-                    "name": "Andrey Afonin",
-                    "link": "#",
-                    "messages": [{
-                        "text": "Privet bratishki",
-                        "date": "10 minutes ago"
-                    }],
-                    "thumb": "./img/andrey_thumb.png"
-                }
-            ]
-        };
 
 
         createContactList(myData.friends, contactList);
@@ -133,35 +133,44 @@
 
         contactListSearch.addEventListener('keyup', function (event) {
 
-            var inputTextRegexp = new RegExp(event.target.value.toLowerCase());
+            try {
+
+                var inputTextRegexp = new RegExp(event.target.value.toLowerCase());
+
+
 
             var hiddenBlock = customData.classes.hidden;
 
             var hiddenOpacity = customData.classes.opacity;
 
-            Array.prototype.forEach.call(contactListChildren, function (child) {
 
-                var contactName = child.getElementsByClassName('contact_name')[0].innerHTML.toLowerCase();
+                Array.prototype.forEach.call(contactListChildren, function (child) {
 
-                if (!inputTextRegexp.test(contactName)) {
+                    var contactName = child.getElementsByClassName('contact_name')[0].innerHTML.toLowerCase();
 
-                    child.className = customData.classes.contactUser + hiddenOpacity;
+                    if (!inputTextRegexp.test(contactName)) {
 
-                    setTimeout(function () {
+                        child.className = customData.classes.contactUser + hiddenOpacity;
 
-                        child.className += hiddenBlock
-                    }, 500)
+                        setTimeout(function () {
 
-                } else {
+                            child.className += hiddenBlock
+                        }, 500)
 
-                    child.className = customData.classes.contactUser;
-
-                    if (!child.className.search(hiddenBlock)) {
+                    } else {
 
                         child.className = customData.classes.contactUser;
+
+                        if (!child.className.search(hiddenBlock)) {
+
+                            child.className = customData.classes.contactUser;
+                        }
                     }
-                }
-            });
+                });
+            } catch (e) {
+
+                console.log(e);
+            }
         });
 
         smilesForChat.addEventListener('click', function (event) {
@@ -223,24 +232,26 @@
 
         textarea.addEventListener('keyup', function (event) {
 
+            var contactBlock = {el: 'li', children: [
+                {el: 'div', elClass: 'img_wrap', children: [
+                    {el: 'a', attrs: [['href', myData.link], ['target', '_blank']], children: [
+                        {el: 'img', elClass:'thumb', attrs: [['src', myData.thumb]]}
+                    ]}
+                ]},
+                {el: 'div', elClass: 'text_wrap', children: [
+                    {el: 'p', elClass: 'chat_name', innerData: myData.name},
+                    {el: 'p', elClass: 'chat_message_data', innerData: timeNow},
+                    {el: 'div', elClass: 'chat_message_wrap', children: [
+                        {el: 'div', innerData: event.target.innerHTML}
+                    ]}
+                ]}
+            ]};
+
             if (event.ctrlKey && event.keyCode === 13) {
 
                 event.preventDefault();
 
-                chatWindow.appendChild(createEl({el: 'li', children: [
-                                            createEl({el: 'div', elClass: 'img_wrap', children: [
-                                                createEl({el: 'a', attrs: [['href', myData.link], ['target', '_blank']], children: [
-                                                    createEl({el: 'img', elClass:'thumb', attrs: [['src', myData.thumb]]})
-                                                ]})
-                                            ]}),
-                                            createEl({el: 'div', elClass: 'text_wrap', children: [
-                                                createEl({el: 'p', elClass: 'chat_name', innerData: myData.name}),
-                                                createEl({el: 'p', elClass: 'chat_message_data', innerData: timeNow}),
-                                                createEl({el: 'div', elClass: 'chat_message_wrap', children: [
-                                                    createEl({el: 'div', innerData: event.target.innerHTML})
-                                                ]})
-                                            ]})
-                    ]}));
+                chatWindow.appendChild(createEl(contactBlock));
 
                 chat.scrollTop = chat.scrollHeight;
 
@@ -289,9 +300,11 @@
         }
 
         if (elObj.children) {
-            for (var i = 0; i < elObj.children.length; i++) {
-                node.appendChild(elObj.children[i]);
-            }
+
+            elObj.children.forEach(function (child) {
+
+                node.appendChild(createEl(child));
+            });
         }
         
         return node;
@@ -301,13 +314,15 @@
 
         return list.forEach(function (contact) {
 
-            parent.appendChild(createEl({el: 'li', elClass: 'contact_user', children: [
-                                    createEl({el: 'img', attrs: [['src', contact.thumb]]}),
-                                    createEl({el: 'p', elClass: 'contact_name', innerData: contact.name}),
-                                    createEl({el: 'div', elClass: 'contact_count', children: [
-                                        createEl({el: 'p', innerData: contact.count})
-                                    ]})
-                ]}));
+            var chatWindowBlock = {el: 'li', elClass: 'contact_user', children: [
+                {el: 'img', attrs: [['src', contact.thumb]]},
+                {el: 'p', elClass: 'contact_name', innerData: contact.name},
+                {el: 'div', elClass: 'contact_count', children: [
+                    {el: 'p', innerData: contact.count}
+                ]}
+            ]};
+
+            parent.appendChild(createEl(chatWindowBlock));
 
             var contactCount = document.getElementsByClassName('contact_count');
 
